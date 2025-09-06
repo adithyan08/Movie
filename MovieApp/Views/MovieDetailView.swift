@@ -26,11 +26,13 @@ struct MovieDetailView: View {
                                 .aspectRatio(16/9, contentMode: .fill)
                         } placeholder: {
                             Rectangle()
-                                .shimmer()
+                                .frame(height: 100)
+                               
                                 .overlay(
-                                    Image(systemName: "photo")
+                                    Image(systemName: "film")
                                         .foregroundColor(.gray)
                                         .font(.largeTitle)
+                                        .shimmer()
                                 )
                         }
                         .clipped()

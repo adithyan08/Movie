@@ -39,16 +39,16 @@ struct SplashScreen: View {
                                 .font(.footnote)
                                 .fontWeight(.medium)
                                 .padding(.top, 10)
+                                .padding(.bottom, 20) // add this to lift text above safe area
                                 .foregroundStyle(.white)
                         } else {
-                            // Fallback on earlier versions
                             Text("Version 1.0")
                                 .font(.footnote)
                                 .fontWeight(.medium)
                                 .padding(.top, 10)
+                                .padding(.bottom, 20) // lift for earlier iOS versions too
                                 .foregroundColor(.white)
                         }
-                        
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.black)

@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		EC54793B2E6C222B00BBA63A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC5478002E6AD15600BBA63A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC5478072E6AD15600BBA63A;
+			remoteInfo = MovieApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		EC5478082E6AD15600BBA63A /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC5479372E6C222B00BBA63A /* MovieAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = MovieApp;
 			sourceTree = "<group>";
 		};
+		EC5479382E6C222B00BBA63A /* MovieAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MovieAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		EC5478052E6AD15600BBA63A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC5479342E6C222B00BBA63A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				EC54780A2E6AD15600BBA63A /* MovieApp */,
+				EC5479382E6C222B00BBA63A /* MovieAppTests */,
 				EC5478092E6AD15600BBA63A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				EC5478082E6AD15600BBA63A /* MovieApp.app */,
+				EC5479372E6C222B00BBA63A /* MovieAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = EC5478082E6AD15600BBA63A /* MovieApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EC5479362E6C222B00BBA63A /* MovieAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC54793D2E6C222B00BBA63A /* Build configuration list for PBXNativeTarget "MovieAppTests" */;
+			buildPhases = (
+				EC5479332E6C222B00BBA63A /* Sources */,
+				EC5479342E6C222B00BBA63A /* Frameworks */,
+				EC5479352E6C222B00BBA63A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC54793C2E6C222B00BBA63A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EC5479382E6C222B00BBA63A /* MovieAppTests */,
+			);
+			name = MovieAppTests;
+			packageProductDependencies = (
+			);
+			productName = MovieAppTests;
+			productReference = EC5479372E6C222B00BBA63A /* MovieAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +130,10 @@
 				TargetAttributes = {
 					EC5478072E6AD15600BBA63A = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					EC5479362E6C222B00BBA63A = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = EC5478072E6AD15600BBA63A;
 					};
 				};
 			};
@@ -100,12 +152,20 @@
 			projectRoot = "";
 			targets = (
 				EC5478072E6AD15600BBA63A /* MovieApp */,
+				EC5479362E6C222B00BBA63A /* MovieAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		EC5478062E6AD15600BBA63A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC5479352E6C222B00BBA63A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EC5479332E6C222B00BBA63A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC54793C2E6C222B00BBA63A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC5478072E6AD15600BBA63A /* MovieApp */;
+			targetProxy = EC54793B2E6C222B00BBA63A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		EC5478162E6AD15700BBA63A /* Debug */ = {
@@ -305,6 +380,42 @@
 			};
 			name = Release;
 		};
+		EC54793E2E6C222B00BBA63A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PTLRW5R376;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = manappuram.MovieAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MovieApp";
+			};
+			name = Debug;
+		};
+		EC54793F2E6C222B00BBA63A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PTLRW5R376;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = manappuram.MovieAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MovieApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -322,6 +433,15 @@
 			buildConfigurations = (
 				EC5478192E6AD15700BBA63A /* Debug */,
 				EC54781A2E6AD15700BBA63A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC54793D2E6C222B00BBA63A /* Build configuration list for PBXNativeTarget "MovieAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC54793E2E6C222B00BBA63A /* Debug */,
+				EC54793F2E6C222B00BBA63A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
