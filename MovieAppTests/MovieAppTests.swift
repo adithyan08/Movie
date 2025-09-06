@@ -1,59 +1,112 @@
-//
-//  MovieAppTests.swift
-//  MovieAppTests
-//
-//  Created by adithyan na on 6/9/25.
-//
-
 import XCTest
-
 @testable import MovieApp
 
-// A mock URLProtocol to return canned data
-class MockURLProtocol: URLProtocol {
-    static var responseData: Data?
-    static var responseError: Error?
+class MockNetworkService: NetworkServiceProtocol {
+    var dataToReturn: Data?
+    var errorToThrow: Error?
 
-    override class func canInit(with request: URLRequest) -> Bool { true }
-    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
-    override func startLoading() {
-        if let error = MockURLProtocol.responseError {
-            client?.urlProtocol(self, didFailWithError: error)
-        } else {
-            let data = MockURLProtocol.responseData ?? Data()
-            client?.urlProtocol(self, didLoad: data)
-            client?.urlProtocolDidFinishLoading(self)
+    func fetch<T>(_ type: T.Type, from url: URL) async throws -> T where T : Decodable, T : Encodable {
+        if let error = errorToThrow {
+            throw error
+        }
+        guard let data = dataToReturn else {
+            throw NetworkError.noData
+        }
+
+        do {
+            let decoded = try JSONDecoder().decode(type, from: data)
+            return decoded
+        } catch {
+            throw NetworkError.decodingError(error)
         }
     }
-    override func stopLoading() {}
+
+    func fetchData(from url: URL) async throws -> Data {
+        if let error = errorToThrow {
+            throw error
+        }
+        guard let data = dataToReturn else {
+            throw NetworkError.noData
+        }
+        return data
+    }
 }
 
 final class MovieAppTests: XCTestCase {
-    var service: TMDbService!
-        var session: URLSession!
-    
-    override func setUpWithError() throws {
-        
-    }
-   
-    
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    var mockNetworkService: MockNetworkService!
+    var tmdbService: TMDbService!
+
+    override func setUp() {
+        super.setUp()
+        mockNetworkService = MockNetworkService()
+        tmdbService = TMDbService(networkService: mockNetworkService)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    override func tearDown() {
+        mockNetworkService = nil
+        tmdbService = nil
+        super.tearDown()
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    func testFetchPopularMoviesSuccess() async throws {
+        let jsonString = """
+        {
+          "page": 1,
+          "results": [
+            {
+              "id": 101,
+              "title": "Test Movie",
+              "poster_path": "/test.jpg"
+            }
+          ],
+          "total_results": 100,
+          "total_pages": 10
+        }
+        """
+
+        mockNetworkService.dataToReturn = Data(jsonString.utf8)
+
+        let response = try await tmdbService.fetchPopularMovies()
+        XCTAssertEqual(response.results.first?.id, 101)
+        XCTAssertEqual(response.results.first?.title, "Test Movie")
+    }
+
+    func testFetchPopularMoviesFailureNetworkError() async {
+        mockNetworkService.errorToThrow = NetworkError.networkError(URLError(.notConnectedToInternet))
+
+        do {
+            _ = try await tmdbService.fetchPopularMovies()
+            XCTFail("Expected network error to be thrown")
+        } catch let error as NetworkError {
+            switch error {
+            case .networkError:
+                XCTAssertTrue(true)
+            default:
+                XCTFail("Expected networkError but got \(error)")
+            }
+        } catch {
+            XCTFail("Unexpected error: \(error)")
         }
     }
 
+    func testFetchPopularMoviesFailureDecodingError() async {
+        let invalidJSON = """
+        { "invalid": "data" }
+        """
+        mockNetworkService.dataToReturn = Data(invalidJSON.utf8)
+
+        do {
+            _ = try await tmdbService.fetchPopularMovies()
+            XCTFail("Expected decoding error")
+        } catch let error as NetworkError {
+            switch error {
+            case .decodingError:
+                XCTAssertTrue(true)
+            default:
+                XCTFail("Expected decodingError but got \(error)")
+            }
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
 }
