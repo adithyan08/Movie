@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Let us know what’s wrong</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Report a Bug</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.yourapp.reportBug</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Give us a second chance!</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>🥹Don’t remove our app!</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.yourapp.retry</string>
+		</dict>
+	</array>
+</dict>
+</plist>

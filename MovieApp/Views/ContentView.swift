@@ -6,6 +6,8 @@
 //
 import SwiftUI
 struct ContentView: View {
+    @EnvironmentObject var router: AppRouter
+       @State private var selectedTab = 0
     var body: some View {
         TabView {
             MovieListView()
@@ -20,6 +22,7 @@ struct ContentView: View {
                     Text("Favorites")
                 }
         }
+        
         .accentColor(.red)
     }
 }
